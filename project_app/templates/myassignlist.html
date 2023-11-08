@@ -1,0 +1,88 @@
+{% include 'navbar.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Assigned Task List</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    
+    <style>
+        
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+body{
+  min-height: 100vh;
+  width: 100%;
+  background: #009579;
+}
+
+
+
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+       <center> <h1 style="color:yellow">My Assigned Task User List</h1></center><br>
+        <table class="table table-striped">
+            <thead>
+                {% if TaskData %}
+                <tr>
+                    <th>Sr.No</th>
+                    <th>Task Name</th>
+                    <th>Assigned To</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <input type="hidden" id="serialNumber" value="0">
+                
+                {% for i in TaskData%}
+                <tr>
+                    
+                    <td id="taskNumber"></td>
+                    <td>{{i.Task_Name}}</td>
+                    <td>{{i.TaskUserName}}</td>
+                    <td> <a class="btn btn-outline-danger" action="deletetask" onclick="return confirm('Are you sure!, You want to Delete this Task ?');" href="/deletetask/deletetask/{{i.id}}">Delete Task</a></td>
+                    
+                </tr>
+                {%endfor%}
+                {% else %}
+                <th><center>You Haven't Assigned The Task Anyone yet !</center></th>
+                {%endif%}
+             
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        const serialNumberInput = document.getElementById('serialNumber');
+        const taskNumber = document.querySelectorAll('#taskNumber');
+
+        let currentSerialNumber = parseInt(serialNumberInput.value);
+
+        function incrementSerialNumber() {
+            currentSerialNumber++;
+            serialNumberInput.value = currentSerialNumber;
+            return currentSerialNumber;
+        }
+
+        taskNumber.forEach((element) => {
+            element.textContent = incrementSerialNumber();
+        });
+    </script>
+</body>
+</html>

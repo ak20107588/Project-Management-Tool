@@ -1,0 +1,123 @@
+{% include 'navbar.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fancy Task List</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Include your custom CSS (if any) -->
+    <style>
+        /* Add custom styles here */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+        *{
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          font-family: 'Poppins', sans-serif;
+        }
+        body{
+          min-height: 100vh;
+          width: 100%;
+          background: #009579;
+        }
+        .container {
+            max-width: 800px;
+        }
+        .task-list {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .task {
+            border-bottom: 1px solid #dcdcdc;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .task:last-child {
+            border: none;
+        }
+        .task-info {
+            flex: 1;
+        }
+        .task-action {
+            display: flex;
+        }
+        .task-title {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        .task-description {
+            color: #555;
+        }
+        .action-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        .action-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="task-list">
+            {% if TaskData %}
+            {% for i in TaskData %}
+            <div class="task">
+                <div class="task-info">
+                    <input type="hidden" id="serialNumber" value="0">
+
+                    <h2 class="task-title"  value="Task">Task <span id="taskNumber"></span> </h2>
+                    <p class="task-title">Task Name :-<span class="task-description"> {{i.Task_Name}} </span></p>
+                    <small>Task Giver :- {{i.AssignUserName}}</small>
+                </div>
+                
+            </div>
+            {% endfor %}
+            
+            
+        </div>
+        {%else%}
+            <p> <center>No One has Assigned You a Task Yet ! </center></p>
+            {%endif%}
+    </div>
+
+    <script>
+        // JavaScript to increment the serial number for new tasks
+        const serialNumberInput = document.getElementById('serialNumber');
+        const taskNumber = document.querySelectorAll('#taskNumber');
+
+        // Get the current serial number from the hidden input
+        let currentSerialNumber = parseInt(serialNumberInput.value);
+
+        // Function to increment the serial number
+        function incrementSerialNumber() {
+            currentSerialNumber++;
+            serialNumberInput.value = currentSerialNumber;
+            return currentSerialNumber;
+        }
+
+        // Loop through the taskNumber elements and set their values
+        taskNumber.forEach((element) => {
+            element.textContent = incrementSerialNumber();
+        });
+    </script>
+
+    <!-- Include Bootstrap JS and jQuery (required for Bootstrap) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

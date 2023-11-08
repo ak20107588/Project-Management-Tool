@@ -1,0 +1,123 @@
+{% include 'navbar.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User List</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Include Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- Include your custom CSS (if any) -->
+    <style>
+        /* Add custom styles here */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+        *{
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          font-family: 'Poppins', sans-serif;
+        }
+        body{
+          min-height: 100vh;
+          width: 100%;
+          background: #009579;
+        }
+        
+        .container {
+            max-width: 800px;
+        }
+        .user-list {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .user {
+            border-bottom: 1px solid #dcdcdc;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .user:last-child {
+            border: none;
+        }
+        .user-info {
+            flex: 1;
+        }
+        .user-details {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        .user-mobile {
+            color: #555;
+        }
+        .whatsapp-button {
+            background-color: #25d366;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .whatsapp-button:hover {
+            background-color: gray;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="user-list">
+            {% if UserData %}
+            {% for i in UserData %}
+            
+            <div class="user">
+                <div class="user-info">
+                    <input type="hidden" id="serialNumber" value="0">
+
+                    <strong class="user-details">Sr No: </strong><span class="user-details" id="taskNumber"></span>
+                    <p class="user-details"><strong>User Name:</strong> {{i.First_Name}} {{i.Last_Name}}</p>
+                    <p class="user-mobile"><strong>Mobile Number:</strong> {{i.Mobile}}</p>
+                </div>
+                <a href="https://wa.me/{{i.Mobile}}" target="_blank" class="btn btn-success"><i class="fab fa-whatsapp"></i> Connect</a>
+            </div>
+            {% endfor %}
+            {%else%}
+            <p><center> No User Data </center></p>
+            {% endif %}
+           
+        </div>
+    </div>
+
+    <script>
+        // JavaScript to increment the serial number for new tasks
+        const serialNumberInput = document.getElementById('serialNumber');
+        const taskNumber = document.querySelectorAll('#taskNumber');
+
+        // Get the current serial number from the hidden input
+        let currentSerialNumber = parseInt(serialNumberInput.value);
+
+        // Function to increment the serial number
+        function incrementSerialNumber() {
+            currentSerialNumber++;
+            serialNumberInput.value = currentSerialNumber;
+            return currentSerialNumber;
+        }
+
+        // Loop through the taskNumber elements and set their values
+        taskNumber.forEach((element) => {
+            element.textContent = incrementSerialNumber();
+        });
+    </script>
+
+    <!-- Include Bootstrap JS and jQuery (required for Bootstrap) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

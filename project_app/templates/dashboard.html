@@ -1,0 +1,141 @@
+{% load static %}
+{% include "navbar.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Project Management</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+
+  <style>
+        
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+*{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: 'Poppins', sans-serif;
+}
+body{
+min-height: 100vh;
+width: 100%;
+background: #009579;
+}
+
+.intro {
+    margin: auto;
+    width: 100%;
+    padding: 10px;
+  }
+  
+  
+  .intro {
+    color: white;
+  }
+  
+  .intro h1 {
+    font-size: 50px;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .intro h2 {
+    text-align: center;
+  }
+  
+  .intro {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .intro a {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+  
+  .intro a {
+    margin-top: 7px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+  }
+  
+  .intro a:hover {
+    background-color: #45a049;
+  }
+  
+  .dashboard {
+    margin: auto;
+    width: 100%;
+    padding: 10px;
+    color: white;
+    top: 50%;
+    left: 50%;
+  }
+  
+  .dashboard h1 {
+    font-size: 50px;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .dashboard a {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+  
+  .dashboard a {
+    margin-top: 7px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+  }
+  
+  .dashboard a:hover {
+    background-color: #45a049;
+  }
+  
+  h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+  }
+
+</style>
+
+  <body>
+    <div class="dashboard">
+        <h1>Welcome, {{request.session.First_Name}} {{id}}!</h1>
+       
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    </div>
+  </body>
+</head>
+</html>
